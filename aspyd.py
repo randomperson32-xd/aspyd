@@ -1,4 +1,5 @@
 import yt_dlp
+import os
 
 print("aspyd - a simple python youtube downloader")
 print("1. download a video")
@@ -11,7 +12,10 @@ if selection == "1":
         ydl.download([url])
     v_id = input("enter video ID: ").strip()
     a_id = input("enter audio ID: ").strip()
+    
+    save_directory = input("where do you wanna save the file? (type for . for current directory)")
     vid_opt = {
+        'paths': {'home': save_directory},
         'format': f'{v_id}+{a_id}', 
         'outtmpl': '%(title)s.%(ext)s',
     }
@@ -21,8 +25,9 @@ if selection == "1":
 elif selection == "2":
     url = input("video url: ")
     audio_codec = input("enter audio codec (mp3, m4a, opus, vorbis, flac, wav): ")
-
+    save_directory = input("where do you wanna save the file? (type for . for current directory)")
     aud_opt = {
+        'paths': {'home': save_directory},
         'format': 'bestaudio/best',
         'writethumbnail': True,
         'postprocessors': [
